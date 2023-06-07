@@ -1,0 +1,39 @@
+name: Build and Deploy NuGet Package
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build_and_deploy:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build ./BlazorParameterCastingMagic/BlazorParameterCastingMagic.csproj --configuration Release --no-restore -o out
+
+    #- name: Test
+    #  run: dotnet test --no-restore --verbosity normal
+
+    #- name: Pack
+    #  run: dotnet pack --configuration Release --no-build -o out
+
+    - name: Deploy
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      shell: pwsh
+      run: |
+        Get-ChildItem -Path out -Filter *.nupkg | ForEach-Object {
+          dotnet nuget push $_.FullName -k $env:NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+        }
