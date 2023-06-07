@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>BlazorParameterCastingMagic</Title>
+
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>2</MinorVersion>
+    <PatchVersion>$([System.DateTime]::Now.ToString(`yyMMddHH`))</PatchVersion>
+    <PackageVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</PackageVersion>
+    
+    <LangVersion>11</LangVersion>
+    <Authors>Florian Gilde</Authors>
+    <Description>
+      The BlazorParameterCastingMagic package provides a way to handle dynamic casting of parameters in Blazor components because Blazor does not natively support implicit conversions for parameters
+    </Description>
+    <PackageProjectUrl>https://github.com/fgilde/BlazorParameterCastingMagic</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/fgilde/BlazorParameterCastingMagic</RepositoryUrl>
+    <Copyright>Copyright © $(Authors) 2020-$([System.DateTime]::Now.Year)</Copyright>
+    <PackageIcon>main.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nextended.Core" Version="7.0.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="main.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
